@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vue Basics</title>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://unpkg.com/vue@next" defer></script>
+  <script src="app.js" defer></script>
+</head>
+
+<body>
+  <header>
+    <h1>Vue Events</h1>
+  </header>
+  <section id="events">
+    <h2>Events in Action</h2>
+    <!-- v-once doesn't update value-->
+    <p v-once>Starting Counter: {{ counter }}</p>
+    <!-- event can point to a function -->
+    <button v-on:click="add">Add</button>
+    <!-- event can call to a function -->
+    <button v-on:click="addNumber(5)">Add 5</button>
+    <button v-on:click="counter--">Remove</button>
+    <p>Result: {{ counter }}</p>
+    <!-- calling event modifiers -->
+    <form v-on:submit.prevent="submitForm">
+      <label>Name: </label>
+      <!-- passing event object using $event -->
+      <input v-on:input="setFirstName($event, 'Mr/Ms.')" placeholder="First Name">
+      <input v-on:input="setLastName" placeholder="Last Name">
+      <button>Submit</button>
+      <!-- computed property binding -->
+      <p>Your Name: {{fullName}}</p>
+    </form>
+    <p>
+      <input placeholder="Enter user ID" v-on:keyup.enter="saveId">
+      <br />
+      User ID: {{userId}}
+    </p>
+    <!-- two way binding-->
+    <p>
+      <label>Password: </label>
+      <!-- <input type="password" v-on:input="setPassword" v-bind:value="password" placeholder="Password"> -->
+      <input type="password" v-model="password" placeholder="Password">
+      <button v-on:click="resetPassword">Reset</button>
+    </p>
+  </section>
+</body>
+
+</html>
