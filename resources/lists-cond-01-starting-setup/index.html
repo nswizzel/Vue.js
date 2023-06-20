@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue Basics</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jost:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://unpkg.com/vue@next" defer></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <h1>Vue Course Goals</h1>
+    </header>
+    <section id="user-goals">
+      <h2>My course goals</h2>
+      <input type="text" v-model="enteredValue" />
+      <button @click="addGoal">Add Goal</button>
+      <p v-if="goalList.length == 0">
+        No goals have been added yet - please start adding some!
+      </p>
+      <ul v-else v-show="showGoals">
+        <li
+          v-for="(goalItem, goalIndex) in goalList"
+          @click="removeGoal(goalIndex)"
+          title="Click to delete"
+          :key="goalItem.id"
+        >
+          {{goalItem.goal}}
+          <!-- @click.stop : stop propagation-->
+          <input @click.stop />
+        </li>
+      </ul>
+      <br />
+      <button @click="toggleGoals" v-if="goalList.length >= 1">
+        {{buttonText}}
+      </button>
+    </section>
+  </body>
+</html>
